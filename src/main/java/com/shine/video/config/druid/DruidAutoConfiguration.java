@@ -1,4 +1,4 @@
-package com.shine.video.druid;
+package com.shine.video.config.druid;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Autowired;

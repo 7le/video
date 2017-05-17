@@ -1,4 +1,4 @@
-package com.shine.video.druid;
+package com.shine.video.config.druid;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
