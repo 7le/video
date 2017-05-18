@@ -15,7 +15,7 @@ public class ResultBean {
     public ResultBean() {
     }
 
-    private ResultBean(int status, String msg) {
+    public ResultBean(int status, String msg) {
         this(status, msg, null);
     }
 

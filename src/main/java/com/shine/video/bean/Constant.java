@@ -9,4 +9,8 @@ public interface Constant {
     int USER_TYPE_ORDINARY = 1;
 
     int USER_TYPE_SPECIAL = 0;
+
+    int DELETE = 1;
+
+    int NO_DELETE =0;
 }

@@ -1,7 +1,9 @@
 package com.shine.video.dao;
 
 import com.shine.video.dao.model.Video;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface VideoMapper {
     int deleteByPrimaryKey(Integer vid);
 

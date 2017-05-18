@@ -2,7 +2,9 @@ package com.shine.video.dao;
 
 
 import com.shine.video.dao.model.Collect;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface CollectMapper {
     int deleteByPrimaryKey(Integer cid);
 

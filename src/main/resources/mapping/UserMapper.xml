@@ -192,4 +192,11 @@
     from user
     where username = #{username}
   </select>
+
+  <select id="selectByUsername" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM user
+    where username = #{username}
+  </select>
 </mapper>
