@@ -185,4 +185,11 @@
       delete_flag = #{deleteFlag,jdbcType=INTEGER}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCountByUsername" resultType="java.lang.Integer">
+    SELECT
+    COUNT(*)
+    from user
+    where username = #{username}
+  </select>
 </mapper>
