@@ -29,7 +29,6 @@ public class VideoApplicationTests {
 		user.setUsername("1");
 		user.setType(1);
 		user.setName("1");
-		user.setCollectId(1);
 		user.setCreatedAt(new Date());
 		user.setCreator("1");
 		user.setDeleteFlag(1);

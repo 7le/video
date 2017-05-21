@@ -4,6 +4,8 @@ package com.shine.video.dao;
 import com.shine.video.dao.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer uid);
@@ -30,4 +32,11 @@ public interface UserMapper {
      * 根据用户名查找管理员
      */
     User selectByUsername(String username);
+
+    /**
+     * 查询列表
+     */
+    List<User> page(String uid);
+
+    int delete(Integer uid);
 }

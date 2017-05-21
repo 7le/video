@@ -3,6 +3,8 @@ package com.shine.video.dao;
 import com.shine.video.dao.model.Video;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface VideoMapper {
     int deleteByPrimaryKey(Integer vid);
@@ -16,4 +18,6 @@ public interface VideoMapper {
     int updateByPrimaryKeySelective(Video record);
 
     int updateByPrimaryKey(Video record);
+
+    List<Video> page();
 }

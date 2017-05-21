@@ -8,7 +8,6 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
-    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
     <result column="creator" property="creator" jdbcType="VARCHAR" />
     <result column="modifier" property="modifier" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
@@ -16,7 +15,7 @@
     <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    uid, name, username, password, type, created_at, updated_at, creator,
+    uid, name, username, password, type, created_at, creator,
     modifier, remark, token, delete_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -32,12 +31,12 @@
   <insert id="insert" parameterType="com.shine.video.dao.model.User" >
     insert into user (uid, name, username, 
       password, type,
-      created_at, updated_at, creator, 
+      created_at, creator,
       modifier, remark, token, 
       delete_flag)
     values (#{uid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR},
       #{modifier,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
       #{deleteFlag,jdbcType=INTEGER})
   </insert>
@@ -61,9 +60,6 @@
       </if>
       <if test="createdAt != null" >
         created_at,
-      </if>
-      <if test="updatedAt != null" >
-        updated_at,
       </if>
       <if test="creator != null" >
         creator,
@@ -100,9 +96,6 @@
       <if test="createdAt != null" >
         #{createdAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedAt != null" >
-        #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
       <if test="creator != null" >
         #{creator,jdbcType=VARCHAR},
       </if>
@@ -138,9 +131,6 @@
       <if test="createdAt != null" >
         created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedAt != null" >
-        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
       <if test="creator != null" >
         creator = #{creator,jdbcType=VARCHAR},
       </if>
@@ -166,7 +156,6 @@
       password = #{password,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       creator = #{creator,jdbcType=VARCHAR},
       modifier = #{modifier,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
@@ -188,4 +177,17 @@
     FROM user
     where username = #{username}
   </select>
+
+  <select id="page" resultMap="BaseResultMap" >
+    select
+    *
+    from user
+    where  creator = #{creator,jdbcType=VARCHAR}
+    AND delete_flag != 1
+  </select>
+
+  <update id="delete" parameterType="java.lang.Integer" >
+    update user SET delete_flag = 1
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
 </mapper>

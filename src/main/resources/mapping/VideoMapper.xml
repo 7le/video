@@ -125,4 +125,10 @@
       remark = #{remark,jdbcType=VARCHAR}
     where vid = #{vid,jdbcType=INTEGER}
   </update>
+
+  <select id="page" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from video
+  </select>
 </mapper>

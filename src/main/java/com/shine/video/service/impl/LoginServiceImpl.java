@@ -36,7 +36,6 @@ public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
         User user=new User();
         user.setType(Constant.USER_TYPE_ORDINARY);
         user.setCreatedAt(new Date());
-        user.setUpdatedAt(new Date());
         user.setCreator(request.getAttribute("name").toString());
         user.setModifier(request.getAttribute("name").toString());
         user.setDeleteFlag(Constant.NO_DELETE);

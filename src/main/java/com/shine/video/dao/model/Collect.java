@@ -9,8 +9,6 @@ public class Collect {
 
     private Integer vid;
 
-    private String name;
-
     private Integer deleteFlag;
 
     private Date createdAt;
@@ -39,14 +37,6 @@ public class Collect {
 
     public void setVid(Integer vid) {
         this.vid = vid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
     }
 
     public Integer getDeleteFlag() {

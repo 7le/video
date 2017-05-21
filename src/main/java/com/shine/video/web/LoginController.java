@@ -1,9 +1,12 @@
 package com.shine.video.web;
 
 
+import com.shine.video.bean.Constant;
 import com.shine.video.bean.ResultBean;
+import com.shine.video.util.EncryptUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,20 +24,17 @@ public class LoginController extends BaseController{
     /**
      * 登录
      */
-    @RequestMapping(value = "login" , method= RequestMethod.POST)
+    @RequestMapping(value = "/login" , method= RequestMethod.GET)
     @ApiOperation(value="登录接口", httpMethod = "POST" , notes="登录接口")
     public ResultBean login(HttpServletRequest request,HttpServletResponse response,
                             @ApiParam(required = true, name = "username", value = "用户名") @RequestParam String username,
-                            @ApiParam(required = true, name = "password", value = "密码") @RequestParam String password ) {
+                            @ApiParam(required = true, name = "password", value = "密码") @RequestParam String password ) throws Exception {
 
-        String error=loginService.doLogin(username,password,request);
-        if(error==null){
-            response.setStatus(response.SC_OK);
-            return ResultBean.SUCCESS;
-        }else {
-            response.setStatus(response.SC_BAD_REQUEST);
-            return ResultBean.error(error);
-        }
+        loginService.doLogin(username,password,request);
+        String token=EncryptUtil.aesEncrypt(username , EncryptUtil.KEY);
+        redisUtil.set(username,token);
+        response.setHeader("Authorization",token);
+        return ResultBean.SUCCESS;
     }
 
     /**
@@ -42,20 +42,16 @@ public class LoginController extends BaseController{
      * @param request
      * @return
      */
-    @RequestMapping(value ="register" , method= RequestMethod.POST)
+    @RequestMapping(value ="/register" , method= RequestMethod.POST)
     @ApiOperation(value="注册接口", httpMethod = "POST" , notes="注册接口")
     public ResultBean register(HttpServletRequest request,HttpServletResponse response,
                            @ApiParam(required = true, name = "username", value = "用户名") @RequestParam String username,
                            @ApiParam(required = true, name = "password", value = "密码") @RequestParam String password) {
-        String error=loginService.doRegister(username,password,request);
-        if(error==null){
-            response.setStatus(response.SC_OK);
-            return ResultBean.SUCCESS;
-        }else {
-            response.setStatus(response.SC_BAD_REQUEST);
-            return ResultBean.error(error);
+        if(Constant.USER_TYPE_SPECIAL!=(int)request.getAttribute("type")){
+            throw new HttpMessageNotReadableException("该用户没有注册权限");
         }
+        loginService.doRegister(username,password,request);
+        return ResultBean.SUCCESS;
+
     }
-
-
 }
