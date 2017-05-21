@@ -5,6 +5,7 @@ import com.shine.video.dao.model.User;
 import com.shine.video.service.LoginService;
 import com.shine.video.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,18 +18,18 @@ import java.util.Date;
 public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
 
     @Override
-    public String doRegister(String username, String password, HttpServletRequest request) {
+    public void doRegister(String username, String password, HttpServletRequest request) {
         if (username == null) {
-            return "请输入用户名";
+            throw new HttpMessageNotReadableException("请输入用户名");
         }
 
         if (password == null || password.length() == 0) {
-            return "请输入密码";
+            throw new HttpMessageNotReadableException("请输入密码");
         }
 
         //检查账号是否被注册
         if (userMapper.selectCountByUsername(username) > 0) {
-            return "该账号已经被注册";
+            throw new HttpMessageNotReadableException("该账号已经被注册");
         }
 
         //添加用户信息
@@ -41,26 +42,22 @@ public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
         user.setDeleteFlag(Constant.NO_DELETE);
         user.setUsername(username);
         user.setPassword(MD5Util.doImaoMd5(username,password));
-
         userMapper.insert(user);
-        return null;
     }
 
     @Override
-    public String doLogin(String username, String password, HttpServletRequest request) {
+    public void doLogin(String username, String password, HttpServletRequest request) {
         User user=userMapper.selectByUsername(username);
 
         if (user == null) {
-            return "用户名不存在";
+            throw new HttpMessageNotReadableException("用户名不存在");
         }
 
         if (password == null || password.length() == 0) {
-            return "请输入密码";
+            throw new HttpMessageNotReadableException("请输入密码");
         }
         if (!user.getPassword().equals(MD5Util.doImaoMd5(user.getUsername(), password))) {
-            return "账号或密码错误";
+            throw new HttpMessageNotReadableException("账号或密码错误");
         }
-
-        return null;
     }
 }

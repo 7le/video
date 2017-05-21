@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.shine.video.bean.ResultBean;
 import com.shine.video.dao.UserMapper;
 import com.shine.video.dao.model.User;
+import com.shine.video.redis.RedisUtil;
 import com.shine.video.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -21,23 +22,21 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        //HttpSession session = request.getSession();
-        //String token =request.getParameter("token");
         String token =request.getHeader("Authorization");
         //String token="ERR15zAv0B1PA64RfD9BTA==";
         if(token!=null){
             String id= EncryptUtil.aesDecrypt(token, EncryptUtil.KEY);
-
             User user=userMapper.selectByPrimaryKey(Integer.valueOf(id));
-
-            //String token1 = (String) session.getAttribute(id);
-            String token1 = user.getToken();
-            if(token.equals(token1)){
+            String toke1=redisUtil.get(user.getUsername()).toString();
+            if(token.equals(toke1)){
                 request.setAttribute("token",token);
+                request.setAttribute("type",user.getType());
                 return true;
             }
         }
@@ -49,7 +48,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         try {
             out = response.getWriter();
             out.append(JSON.toJSONString(resultBean));
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

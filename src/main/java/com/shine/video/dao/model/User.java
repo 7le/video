@@ -13,8 +13,6 @@ public class User {
 
     private Integer type;
 
-    private Integer collectId;
-
     private Date createdAt;
 
     private Date updatedAt;
@@ -67,14 +65,6 @@ public class User {
 
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    public Integer getCollectId() {
-        return collectId;
-    }
-
-    public void setCollectId(Integer collectId) {
-        this.collectId = collectId;
     }
 
     public Date getCreatedAt() {

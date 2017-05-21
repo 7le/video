@@ -15,7 +15,7 @@ public interface LoginService {
      * @param request  当前会话请求
      * @return 成功返回null, 失败返回原因
      */
-    String doRegister(String username, String password, HttpServletRequest request);
+    void doRegister(String username, String password, HttpServletRequest request);
 
     /**
      * 执行登录
@@ -25,5 +25,5 @@ public interface LoginService {
      * @param request  当前会话请求
      * @return 成功返回null, 失败返回原因
      */
-    String doLogin(String username, String password, HttpServletRequest request);
+    void doLogin(String username, String password, HttpServletRequest request);
 }

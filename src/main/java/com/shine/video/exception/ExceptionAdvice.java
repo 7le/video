@@ -26,7 +26,7 @@ public class ExceptionAdvice extends BaseController{
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResultBean handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         videoLogger.error("参数解析失败", e);
-        return new ResultBean(HttpStatus.BAD_REQUEST.value(),HttpStatus.BAD_REQUEST.getReasonPhrase());
+        return new ResultBean(HttpStatus.BAD_REQUEST.value(),e.getMessage());
     }
 
     /**
