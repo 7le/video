@@ -19,5 +19,7 @@ public interface VideoMapper {
 
     int updateByPrimaryKey(Video record);
 
-    List<Video> page();
+    List<Video> page(String name);
+
+    int delete(Integer vid);
 }

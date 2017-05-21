@@ -130,5 +130,13 @@
     select
     <include refid="Base_Column_List" />
     from video
+    <if test="name != null" >
+      name like CONCAT('%','${name}','%' )
+    </if>
   </select>
+
+  <update id="delete" parameterType="java.lang.Integer" >
+    update video SET delete_flag = 1
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -24,6 +24,14 @@ public class VideoApplicationTests {
 	private UserMapper userMapper;
 
 	@Test
+	public void StringTest(){
+		String str="cat.mp4";
+		String[] name=str.split("\\.");
+
+		System.out.println(name[name.length-1]);
+	}
+
+	@Test
 	public void contextLoads() {
 		User user=new User();
 		user.setUsername("1");

@@ -30,9 +30,6 @@ public class UserController extends BaseController {
         if(Constant.USER_TYPE_SPECIAL!=(int)request.getAttribute("type")){
             throw new HttpMessageNotReadableException("该用户没有查看收藏列表权限");
         }
-        /*
-         * 第一个参数是第几页；第二个参数是每页显示条数。
-         */
         PageHelper.startPage(pageNo,pageSize);
         return ResultBean.success(userService.page((Integer) request.getAttribute("userId")));
     }

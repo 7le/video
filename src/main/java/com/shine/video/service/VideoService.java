@@ -1,6 +1,7 @@
 package com.shine.video.service;
 
 import com.shine.video.dao.model.Video;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -9,5 +10,28 @@ import java.util.List;
  */
 public interface VideoService {
 
-    List<Video> page();
+    /**
+     * 列表页
+     * @param name
+     * @return
+     */
+    List<Video> page(String name);
+
+    /**
+     * 查询单个
+     * @param vid
+     * @return
+     */
+    Video selectOne(Integer vid);
+
+    /**
+     * 上传
+     * @param file
+     */
+    void upload(Integer id, MultipartFile file) throws Exception;
+
+    /**
+     * 删除
+     */
+    void delete(Integer vid);
 }
