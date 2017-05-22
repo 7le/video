@@ -6,6 +6,7 @@ import com.google.common.base.Strings;
 import com.shine.video.dao.CollectMapper;
 import com.shine.video.dao.UserMapper;
 import com.shine.video.dao.model.User;
+import com.shine.video.util.MD5Util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class VideoApplicationTests {
 		String[] name=str.split("\\.");
 
 		System.out.println(name[name.length-1]);
+
+		System.out.println(MD5Util.doImaoMd5("root","youziyouzi"));
 	}
 
 	@Test
