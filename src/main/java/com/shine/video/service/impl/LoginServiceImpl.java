@@ -7,6 +7,7 @@ import com.shine.video.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.Date;
 public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
 
     @Override
+    @Transactional
     public void doRegister(String username, String password, HttpServletRequest request) {
         if (username == null) {
             throw new HttpMessageNotReadableException("请输入用户名");
@@ -45,6 +47,7 @@ public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
     }
 
     @Override
+    @Transactional
     public void doLogin(String username, String password, HttpServletRequest request) {
         User user=userMapper.selectByUsername(username);
 

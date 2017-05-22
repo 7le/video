@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 
 /**
  * 视频控制器
@@ -49,6 +46,10 @@ public class VideoController extends BaseController{
                              @ApiParam(name = "file", value = "视频")
                              @RequestParam("file")MultipartFile file) throws Exception {
 
+        if(Constant.USER_TYPE_SPECIAL!=(int)request.getAttribute("type")){
+            throw new HttpMessageNotReadableException("该用户没有上传视频权限");
+        }
+
         videoService.upload((Integer) request.getAttribute("userId"),file);
         return ResultBean.SUCCESS;
     }
@@ -56,7 +57,7 @@ public class VideoController extends BaseController{
     /**
      * 视频展示接口
      */
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)
     @ApiOperation(value="视频列表", httpMethod = "GET" , notes="视频列表")
     public ResultBean One(HttpServletRequest request, @PathVariable Integer id) throws Exception {
 

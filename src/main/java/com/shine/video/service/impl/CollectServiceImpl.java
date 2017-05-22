@@ -6,6 +6,7 @@ import com.shine.video.dao.model.Collect;
 import com.shine.video.service.CollectService;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,9 @@ import java.util.List;
 @Service
 public class CollectServiceImpl extends BaseServiceImpl implements CollectService {
 
+
     @Override
+    @Transactional
     public void collect(Integer userId, Integer videoId) {
 
         if(collectMapper.selectByUidAndVid(userId,videoId)!=null){
@@ -32,6 +35,7 @@ public class CollectServiceImpl extends BaseServiceImpl implements CollectServic
     }
 
     @Override
+    @Transactional
     public void delete(Integer userId, Integer videoId) {
         Collect collect=collectMapper.selectByUidAndVid(userId,videoId);
         collect.setDeleteFlag(Constant.DELETE);
@@ -39,6 +43,7 @@ public class CollectServiceImpl extends BaseServiceImpl implements CollectServic
     }
 
     @Override
+    @Transactional
     public List<Collect> page(Integer userId) {
         return collectMapper.page(userId);
     }

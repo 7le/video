@@ -3,6 +3,7 @@ package com.shine.video.service.impl;
 import com.shine.video.dao.model.User;
 import com.shine.video.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,11 +14,13 @@ import java.util.List;
 public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
     @Override
+    @Transactional
     public List<User> page(Integer uid) {
         return userMapper.page(uid.toString());
     }
 
     @Override
+    @Transactional
     public void delete(Integer deleteId) {
         userMapper.delete(deleteId);
     }

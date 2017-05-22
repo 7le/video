@@ -25,6 +25,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private RedisUtil redisUtil;
 
+    //预处理回调方法，实现处理器的预处理（如登录检查）
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 

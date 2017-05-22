@@ -5,6 +5,7 @@ import com.shine.video.dao.model.Video;
 import com.shine.video.service.VideoService;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
@@ -20,16 +21,19 @@ import java.util.List;
 public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
 
     @Override
+    @Transactional
     public List<Video> page(String name) {
         return videoMapper.page(name);
     }
 
     @Override
+    @Transactional
     public Video selectOne(Integer vid) {
         return videoMapper.selectByPrimaryKey(vid);
     }
 
     @Override
+    @Transactional
     public void upload(Integer id, MultipartFile file) throws Exception{
 
         if(file==null){
@@ -56,9 +60,12 @@ public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
         //video.setPhotoUrl();
         video.setVideoUrl(filename);
         videoMapper.insert(video);
+
+        throw new Exception();
     }
 
     @Override
+    @Transactional
     public void delete(Integer vid) {
         videoMapper.delete(vid);
     }
