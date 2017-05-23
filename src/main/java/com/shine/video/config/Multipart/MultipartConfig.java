@@ -19,7 +19,7 @@ public class MultipartConfig {
         // 设置总上传数据总大小
         factory.setMaxRequestSize("10240MB");
         //Sets the directory location where files will be stored.
-        //factory.setLocation("路径地址");
+        //factory.setLocation("/software/video/");
         return factory.createMultipartConfig();
     }
 }

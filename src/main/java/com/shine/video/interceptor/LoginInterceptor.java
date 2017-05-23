@@ -32,9 +32,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         String token =request.getHeader("Authorization");
         //String token="ERR15zAv0B1PA64RfD9BTA==";
         if(token!=null){
-            String id= EncryptUtil.aesDecrypt(token, EncryptUtil.KEY);
-            User user=userMapper.selectByPrimaryKey(Integer.valueOf(id));
-            String toke1=redisUtil.get(user.getUsername()).toString();
+            String name= EncryptUtil.aesDecrypt(token, EncryptUtil.KEY);
+            User user=userMapper.selectByUsername(name);
+            String toke1=redisUtil.get(name).toString();
             if(token.equals(toke1)){
                 request.setAttribute("token",token);
                 request.setAttribute("type",user.getType());

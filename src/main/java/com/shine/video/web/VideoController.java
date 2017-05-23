@@ -43,7 +43,7 @@ public class VideoController extends BaseController{
     @RequestMapping(value = "upload",method = RequestMethod.POST)
     @ApiOperation(value="视频上传", httpMethod = "POST" , notes="视频上传")
     public ResultBean upload(HttpServletRequest request,
-                             @ApiParam(name = "file", value = "视频")
+                             @ApiParam(name = "file", value = "视频 MultipartFile")
                              @RequestParam("file")MultipartFile file) throws Exception {
 
         if(Constant.USER_TYPE_SPECIAL!=(int)request.getAttribute("type")){

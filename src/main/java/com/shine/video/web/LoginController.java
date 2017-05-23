@@ -24,7 +24,7 @@ public class LoginController extends BaseController{
     /**
      * 登录
      */
-    @RequestMapping(value = "/login" , method= RequestMethod.GET)
+    @RequestMapping(value = "/login" , method= RequestMethod.POST)
     @ApiOperation(value="登录接口", httpMethod = "POST" , notes="登录接口")
     public ResultBean login(HttpServletRequest request,HttpServletResponse response,
                             @ApiParam(required = true, name = "username", value = "用户名") @RequestParam String username,

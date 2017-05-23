@@ -46,22 +46,21 @@ public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
         }
         String name=System.currentTimeMillis()+"."+str[str.length-1];
         BufferedOutputStream out = new BufferedOutputStream(
-                new FileOutputStream(new File(name)));
+                new FileOutputStream(new File("/software/video/"+name)));
         out.write(file.getBytes());
         out.flush();
         out.close();
         //路径在linux下再配置
-        String filename=name;
+        String filename="http://7le.online/"+name;
         Video video=new Video();
         video.setDeleteFlag(Constant.NO_DELETE);
         video.setCreatedAt(new Date());
-        video.setName(str[str.length-1]);
+        video.setName(str[0]);
         video.setCreator(id.toString());
         //video.setPhotoUrl();
         video.setVideoUrl(filename);
         videoMapper.insert(video);
 
-        throw new Exception();
     }
 
     @Override

@@ -175,7 +175,7 @@
     SELECT
     <include refid="Base_Column_List"/>
     FROM user
-    where username = #{username}
+    where username = #{username,jdbcType=VARCHAR}
   </select>
 
   <select id="page" resultMap="BaseResultMap" >
