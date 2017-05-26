@@ -48,7 +48,7 @@ public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
 
     @Override
     @Transactional
-    public void doLogin(String username, String password, HttpServletRequest request) {
+    public User doLogin(String username, String password, HttpServletRequest request) {
         User user=userMapper.selectByUsername(username);
 
         if (user == null) {
@@ -61,5 +61,6 @@ public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
         if (!user.getPassword().equals(MD5Util.doImaoMd5(user.getUsername(), password))) {
             throw new HttpMessageNotReadableException("账号或密码错误");
         }
+        return user;
     }
 }

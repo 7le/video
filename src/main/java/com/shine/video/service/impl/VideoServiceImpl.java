@@ -3,6 +3,7 @@ package com.shine.video.service.impl;
 import com.shine.video.bean.Constant;
 import com.shine.video.dao.model.Video;
 import com.shine.video.service.VideoService;
+import com.shine.video.util.VideoUtil;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,6 +62,36 @@ public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
         video.setVideoUrl(filename);
         videoMapper.insert(video);
 
+    }
+
+    @Override
+    public void uploadTest(Integer id, MultipartFile file) throws Exception {
+        if(file==null){
+            throw new HttpMessageNotReadableException("文件为空");
+        }
+        String[] str=file.getOriginalFilename().split("\\.");
+        //暂时只支持mp4格式
+        if(!"mp4".equals(str[str.length-1]) && !"MP4".equals(str[str.length-1])){
+            throw new HttpMessageNotReadableException("暂时只支持mp4格式");
+        }
+        String name=System.currentTimeMillis()+"."+str[str.length-1];
+        BufferedOutputStream out = new BufferedOutputStream(
+                new FileOutputStream(new File("/software/video/"+name)));
+        out.write(file.getBytes());
+        out.flush();
+        out.close();
+
+        VideoUtil.processImg("/software/video/"+name,null);
+        //路径在linux下再配置
+        String filename="http://7le.online/"+name;
+        Video video=new Video();
+        video.setDeleteFlag(Constant.NO_DELETE);
+        video.setCreatedAt(new Date());
+        video.setName(str[0]);
+        video.setCreator(id.toString());
+        //video.setPhotoUrl();
+        video.setVideoUrl(filename);
+        videoMapper.insert(video);
     }
 
     @Override

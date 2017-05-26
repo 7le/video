@@ -55,6 +55,23 @@ public class VideoController extends BaseController{
     }
 
     /**
+     * 视频上传测试截图
+     */
+    @RequestMapping(value = "test",method = RequestMethod.POST)
+    @ApiOperation(value="视频上传测试截图", httpMethod = "POST" , notes="视频上传测试截图")
+    public ResultBean uploadTest(HttpServletRequest request,
+                             @ApiParam(name = "file", value = "视频 MultipartFile")
+                             @RequestParam("file")MultipartFile file) throws Exception {
+
+        if(Constant.USER_TYPE_SPECIAL!=(int)request.getAttribute("type")){
+            throw new HttpMessageNotReadableException("该用户没有上传视频权限");
+        }
+
+        videoService.uploadTest((Integer) request.getAttribute("userId"),file);
+        return ResultBean.SUCCESS;
+    }
+
+    /**
      * 视频展示接口
      */
     @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)

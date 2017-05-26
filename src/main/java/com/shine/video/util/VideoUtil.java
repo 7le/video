@@ -17,7 +17,7 @@ public class VideoUtil {
         }
         String imgName=System.currentTimeMillis()+".jpg";
         List<String> commands = new java.util.ArrayList<String>();
-        commands.add(ffmpeg_path);
+        //commands.add(ffmpeg_path);
         commands.add("-i");
         commands.add(video_path);
         commands.add("-y");

@@ -3,6 +3,7 @@ package com.shine.video.web;
 
 import com.shine.video.bean.Constant;
 import com.shine.video.bean.ResultBean;
+import com.shine.video.dao.model.User;
 import com.shine.video.util.EncryptUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -30,11 +31,12 @@ public class LoginController extends BaseController{
                             @ApiParam(required = true, name = "username", value = "用户名") @RequestParam String username,
                             @ApiParam(required = true, name = "password", value = "密码") @RequestParam String password ) throws Exception {
 
-        loginService.doLogin(username,password,request);
+        User user=loginService.doLogin(username,password,request);
         String token=EncryptUtil.aesEncrypt(username , EncryptUtil.KEY);
         redisUtil.set(username,token);
         response.setHeader("Authorization",token);
-        return ResultBean.SUCCESS;
+        user.setToken(token);
+        return ResultBean.success(user);
     }
 
     /**

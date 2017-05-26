@@ -1,5 +1,7 @@
 package com.shine.video.service;
 
+import com.shine.video.dao.model.User;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -25,5 +27,5 @@ public interface LoginService {
      * @param request  当前会话请求
      * @return 成功返回null, 失败返回原因
      */
-    void doLogin(String username, String password, HttpServletRequest request);
+    User doLogin(String username, String password, HttpServletRequest request);
 }
