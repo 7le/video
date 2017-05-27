@@ -31,6 +31,12 @@ public interface VideoService {
     void upload(Integer id, MultipartFile file) throws Exception;
 
     /**
+     * 上传
+     * @param file
+     */
+    void transCode(Integer id, MultipartFile file) throws Exception;
+
+    /**
      * 删除
      */
     void delete(Integer vid);

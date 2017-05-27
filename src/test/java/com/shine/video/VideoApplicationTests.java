@@ -14,10 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,6 +22,16 @@ public class VideoApplicationTests {
 
 	@Autowired
 	private UserMapper userMapper;
+
+	@Test
+	public void time(){
+		long hour = 60 * 60 * 1000;
+		long time = System.currentTimeMillis();
+		time += 8 * hour;
+		time %= 24 * hour;
+		time = 24 * hour - time;
+		System.out.println(time);
+	}
 
 	@Test
 	public void process(){

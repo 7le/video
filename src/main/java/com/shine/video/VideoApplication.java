@@ -30,7 +30,7 @@ public class VideoApplication {
 
 		public void addInterceptors(InterceptorRegistry registry) {
 			registry.addInterceptor(loginInterceptor()).addPathPatterns("/user/**","/collect/**","/register","/video/**")
-					.excludePathPatterns("/video/show/**","/video");
+					.excludePathPatterns("/video/show/**","/video","/video/transCode");
 		}
 	}
 }

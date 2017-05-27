@@ -8,20 +8,35 @@
     <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
     <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+
+    <association property="video" javaType="com.shine.video.dao.model.Video">
+        <id column="vid" property="vid" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+        <result column="photo_url" property="photoUrl" jdbcType="VARCHAR" />
+    </association>
+
   </resultMap>
   <sql id="Base_Column_List" >
     cid, uid, vid, delete_flag, created_at, remark
   </sql>
+
+  <sql id="video">
+    name,video_url,photo_url
+  </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from collect
     where cid = #{cid,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from collect
     where cid = #{cid,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.shine.video.dao.model.Collect" >
     insert into collect (cid, uid, vid, 
       delete_flag, created_at,
@@ -30,6 +45,7 @@
       #{deleteFlag,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
       #{remark,jdbcType=VARCHAR})
   </insert>
+
   <insert id="insertSelective" parameterType="com.shine.video.dao.model.Collect" >
     insert into collect
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -73,6 +89,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.shine.video.dao.model.Collect" >
     update collect
     <set >
@@ -94,6 +111,7 @@
     </set>
     where cid = #{cid,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.shine.video.dao.model.Collect" >
     update collect
     set uid = #{uid,jdbcType=INTEGER},
@@ -103,6 +121,7 @@
       remark = #{remark,jdbcType=VARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
+
   <select id="selectByUidAndVid" resultMap="BaseResultMap" >
     select
     *
@@ -111,11 +130,16 @@
     AND vid = #{vid,jdbcType=INTEGER}
     AND delete_flag != 1
   </select>
+
   <select id="page" resultMap="BaseResultMap" >
     select
-    *
-    from collect
-    where  uid = #{uid,jdbcType=INTEGER}
-    AND delete_flag != 1
+    c.*,
+    <include refid="video" />
+    from collect c ,video v
+    where  c.uid = #{uid,jdbcType=INTEGER}
+    AND c.delete_flag != 1
+    AND v.delete_flag !=1
+    AND c.vid=v.vid
   </select>
+
 </mapper>

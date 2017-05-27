@@ -55,6 +55,19 @@ public class VideoController extends BaseController{
     }
 
     /**
+     * 视频上传带转码 测试
+     */
+    @RequestMapping(value = "transCode",method = RequestMethod.POST)
+    @ApiOperation(value="视频转码上传", httpMethod = "POST" , notes="视频转码上传")
+    public ResultBean transCode(HttpServletRequest request,
+                             @ApiParam(name = "file", value = "视频 MultipartFile")
+                             @RequestParam("file")MultipartFile file) throws Exception {
+
+        videoService.transCode(1,file);
+        return ResultBean.SUCCESS;
+    }
+
+    /**
      * 视频展示接口
      */
     @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)

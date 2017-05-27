@@ -131,7 +131,7 @@
     <include refid="Base_Column_List" />
     from video
     <if test="name != null" >
-      name like CONCAT('%','${name}','%' )
+     WHERE name like CONCAT('%','${name}','%' )
     </if>
   </select>
 

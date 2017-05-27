@@ -100,7 +100,7 @@ public class RedisUtil {
         try {
             ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
             operations.set(key, value);
-            redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
+            redisTemplate.expire(key, expireTime, TimeUnit.MILLISECONDS);
             result = true;
         } catch (Exception e) {
 

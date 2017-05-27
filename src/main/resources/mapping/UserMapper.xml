@@ -182,8 +182,8 @@
     select
     *
     from user
-    where  creator = #{creator,jdbcType=VARCHAR}
-    AND delete_flag != 1
+    where  creator = #{uid,jdbcType=VARCHAR}
+    AND delete_flag != 1 AND type !=1
   </select>
 
   <update id="delete" parameterType="java.lang.Integer" >

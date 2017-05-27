@@ -15,6 +15,16 @@ public class Collect {
 
     private String remark;
 
+    public Video getVideo() {
+        return video;
+    }
+
+    public void setVideo(Video video) {
+        this.video = video;
+    }
+
+    private Video video;
+
     public Integer getCid() {
         return cid;
     }
