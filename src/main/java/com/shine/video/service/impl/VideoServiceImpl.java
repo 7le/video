@@ -35,7 +35,7 @@ public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
 
     @Override
     @Transactional
-    public void upload(Integer id, MultipartFile file) throws Exception{
+    public void upload(Integer id, MultipartFile file, String videoName) throws Exception{
 
         if(file==null){
             throw new HttpMessageNotReadableException("文件为空");
@@ -58,7 +58,7 @@ public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
         Video video=new Video();
         video.setDeleteFlag(Constant.NO_DELETE);
         video.setCreatedAt(new Date());
-        video.setName(str[0]);
+        video.setName(videoName);
         video.setCreator(id.toString());
         video.setPhotoUrl("http://7le.online/img/"+photoUrl);
         video.setVideoUrl(filename);

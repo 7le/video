@@ -38,6 +38,7 @@ public class TimeUtil {
         time += 8 * hour;
         time %= 24 * hour;
         time = 24 * hour - time;
+        System.out.println("time:"+time);
         return time;
     }
 

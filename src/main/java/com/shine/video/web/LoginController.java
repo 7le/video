@@ -34,7 +34,7 @@ public class LoginController extends BaseController{
 
         User user=loginService.doLogin(username,password,request);
         String token=EncryptUtil.aesEncrypt(username , EncryptUtil.KEY);
-        redisUtil.set(username, token, TimeUtil.getTime());
+        redisUtil.set(username, token);
         response.setHeader("Authorization",token);
         user.setToken(token);
         return ResultBean.success(user);
