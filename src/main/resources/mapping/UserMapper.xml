@@ -169,6 +169,7 @@
     COUNT(*)
     from user
     where username = #{username}
+    And delete_flag!=1
   </select>
 
   <select id="selectByUsername" resultMap="BaseResultMap">
