@@ -130,9 +130,11 @@
     select
     <include refid="Base_Column_List" />
     from video
+    WHERE  delete_flag!=1
     <if test="name != null" >
-     WHERE name like CONCAT('%','${name}','%' )
+      AND  name like CONCAT('%','${name}','%' )
     </if>
+
   </select>
 
   <update id="delete" parameterType="java.lang.Integer" >

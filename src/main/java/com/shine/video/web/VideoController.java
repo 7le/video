@@ -45,7 +45,7 @@ public class VideoController extends BaseController{
     public ResultBean upload(HttpServletRequest request,
                              @ApiParam(name = "file", value = "视频 MultipartFile")
                              @RequestParam("file")MultipartFile file,
-                             @PathVariable String name) throws Exception {
+                             @ApiParam(name = "name", value = "视频名称") String name) throws Exception {
 
         if(Constant.USER_TYPE_SPECIAL!=(int)request.getAttribute("type")){
             throw new HttpMessageNotReadableException("该用户没有上传视频权限");
