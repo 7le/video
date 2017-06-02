@@ -35,7 +35,7 @@ public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void upload(Integer id, MultipartFile file) throws Exception{
+    public void upload(Integer id, MultipartFile file, String videoName) throws Exception{
 
         if(file==null){
             throw new HttpMessageNotReadableException("文件为空");
@@ -67,6 +67,7 @@ public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void transCode(Integer id, MultipartFile file) throws Exception {
         if(file==null){
             throw new HttpMessageNotReadableException("文件为空");
