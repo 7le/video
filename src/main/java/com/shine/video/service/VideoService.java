@@ -33,5 +33,5 @@ public interface VideoService {
     /**
      * 删除
      */
-    void delete(Integer vid);
+    void delete(Integer vid) throws Exception;
 }

@@ -19,7 +19,7 @@ import java.util.Date;
 public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void doRegister(String username, String password, HttpServletRequest request) {
         if (username == null) {
             throw new HttpMessageNotReadableException("请输入用户名");
@@ -47,7 +47,7 @@ public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public User doLogin(String username, String password, HttpServletRequest request) {
         User user=userMapper.selectByUsername(username);
 

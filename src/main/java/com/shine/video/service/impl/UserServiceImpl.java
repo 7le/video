@@ -14,13 +14,13 @@ import java.util.List;
 public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<User> page(Integer uid) {
         return userMapper.page(uid.toString());
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Integer deleteId) {
         userMapper.delete(deleteId);
     }

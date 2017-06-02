@@ -22,19 +22,19 @@ import java.util.List;
 public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<Video> page(String name) {
         return videoMapper.page(name);
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Video selectOne(Integer vid) {
         return videoMapper.selectByPrimaryKey(vid);
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void upload(Integer id, MultipartFile file) throws Exception{
 
         if(file==null){
@@ -67,8 +67,9 @@ public class VideoServiceImpl extends BaseServiceImpl implements VideoService {
     }
 
     @Override
-    @Transactional
-    public void delete(Integer vid) {
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Integer vid) throws Exception {
         videoMapper.delete(vid);
+        throw new HttpMessageNotReadableException("该视频已经收藏");
     }
 }

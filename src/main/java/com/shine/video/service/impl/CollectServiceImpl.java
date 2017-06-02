@@ -19,7 +19,7 @@ public class CollectServiceImpl extends BaseServiceImpl implements CollectServic
 
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void collect(Integer userId, Integer videoId) {
 
         if(collectMapper.selectByUidAndVid(userId,videoId)!=null){
@@ -35,7 +35,7 @@ public class CollectServiceImpl extends BaseServiceImpl implements CollectServic
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Integer userId, Integer videoId) {
         Collect collect=collectMapper.selectByUidAndVid(userId,videoId);
         collect.setDeleteFlag(Constant.DELETE);
@@ -43,7 +43,7 @@ public class CollectServiceImpl extends BaseServiceImpl implements CollectServic
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<Collect> page(Integer userId) {
         return collectMapper.page(userId);
     }

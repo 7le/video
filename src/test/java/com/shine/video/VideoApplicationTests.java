@@ -3,9 +3,9 @@ package com.shine.video;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
-import com.shine.video.dao.CollectMapper;
 import com.shine.video.dao.UserMapper;
 import com.shine.video.dao.model.User;
+import com.shine.video.service.VideoService;
 import com.shine.video.util.MD5Util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +25,16 @@ public class VideoApplicationTests {
 
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private VideoService videoService;
+
+	@Test
+	public void transactional() throws Exception {
+
+		videoService.delete(36);
+
+	}
+
 
 	@Test
 	public void process(){
