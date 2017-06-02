@@ -44,13 +44,28 @@ public class VideoController extends BaseController{
     @ApiOperation(value="视频上传", httpMethod = "POST" , notes="视频上传")
     public ResultBean upload(HttpServletRequest request,
                              @ApiParam(name = "file", value = "视频 MultipartFile")
-                             @RequestParam("file")MultipartFile file) throws Exception {
+                             @RequestParam("file")MultipartFile file,
+                             @ApiParam(name = "name", value = "视频名称") String name) throws Exception {
 
         if(Constant.USER_TYPE_SPECIAL!=(int)request.getAttribute("type")){
             throw new HttpMessageNotReadableException("该用户没有上传视频权限");
         }
 
-        videoService.upload((Integer) request.getAttribute("userId"),file);
+        videoService.upload((Integer) request.getAttribute("userId"),file,name);
+        return ResultBean.SUCCESS;
+    }
+
+    /**
+     * 视频上传带转码 测试
+     */
+    @RequestMapping(value = "transCode",method = RequestMethod.POST)
+    @ApiOperation(value="视频转码上传", httpMethod = "POST" , notes="视频转码上传")
+    public ResultBean transCode(HttpServletRequest request,
+                             @ApiParam(name = "file", value = "视频 MultipartFile")
+                             @RequestParam("file")MultipartFile file,
+                             @ApiParam(name = "name", value = "视频名称") String name) throws Exception {
+
+        videoService.transCode(1,file);
         return ResultBean.SUCCESS;
     }
 

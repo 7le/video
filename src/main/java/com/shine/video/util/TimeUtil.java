@@ -29,4 +29,17 @@ public class TimeUtil {
 
     }
 
+    /**
+     * 获得当前到第二天的剩余的时间
+     */
+    public static Long getTime(){
+        long hour = 60 * 60 * 1000;
+        long time = System.currentTimeMillis();
+        time += 8 * hour;
+        time %= 24 * hour;
+        time = 24 * hour - time;
+        System.out.println("time:"+time);
+        return time;
+    }
+
 }

@@ -5,6 +5,7 @@ import com.shine.video.bean.Constant;
 import com.shine.video.bean.ResultBean;
 import com.shine.video.dao.model.User;
 import com.shine.video.util.EncryptUtil;
+import com.shine.video.util.TimeUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -33,7 +34,7 @@ public class LoginController extends BaseController{
 
         User user=loginService.doLogin(username,password,request);
         String token=EncryptUtil.aesEncrypt(username , EncryptUtil.KEY);
-        redisUtil.set(username,token);
+        redisUtil.set(username, token);
         response.setHeader("Authorization",token);
         user.setToken(token);
         return ResultBean.success(user);

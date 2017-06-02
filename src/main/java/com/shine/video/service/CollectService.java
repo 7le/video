@@ -1,6 +1,5 @@
 package com.shine.video.service;
 
-import com.shine.video.bean.Page2;
 import com.shine.video.dao.model.Collect;
 
 import java.util.List;

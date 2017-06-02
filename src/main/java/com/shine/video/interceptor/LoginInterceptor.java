@@ -39,6 +39,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 request.setAttribute("token",token);
                 request.setAttribute("type",user.getType());
                 request.setAttribute("userId",user.getUid());
+                request.setAttribute("name",user.getName());
                 return true;
             }
         }

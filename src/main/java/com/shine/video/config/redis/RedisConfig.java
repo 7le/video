@@ -59,7 +59,7 @@ public class RedisConfig extends CachingConfigurationSelector{
     public CacheManager cacheManager(RedisTemplate redisTemplate) {
         RedisCacheManager rcm = new RedisCacheManager(redisTemplate);
         //设置缓存过期时间
-        rcm.setDefaultExpiration(60*60*24);//秒
+        rcm.setDefaultExpiration(60*24);//秒
         //设置value的过期时间
         //Map<String,Long> map=new HashMap();
         //map.put("test",60L);

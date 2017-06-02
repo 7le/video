@@ -38,8 +38,8 @@ public class LoginServiceImpl  extends BaseServiceImpl implements LoginService{
         User user=new User();
         user.setType(Constant.USER_TYPE_ORDINARY);
         user.setCreatedAt(new Date());
-        user.setCreator(request.getAttribute("name").toString());
-        user.setModifier(request.getAttribute("name").toString());
+        user.setCreator(request.getAttribute("userId").toString());
+        user.setModifier(request.getAttribute("userId").toString());
         user.setDeleteFlag(Constant.NO_DELETE);
         user.setUsername(username);
         user.setPassword(MD5Util.doImaoMd5(username,password));
