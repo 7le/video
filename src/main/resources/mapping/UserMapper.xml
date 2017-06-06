@@ -177,6 +177,7 @@
     <include refid="Base_Column_List"/>
     FROM user
     where username = #{username,jdbcType=VARCHAR}
+    AND delete_flag != 1
   </select>
 
   <select id="page" resultMap="BaseResultMap" >
