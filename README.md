@@ -15,7 +15,7 @@ server.port=9000
 # session最大超时时间(分钟)，默认为30
 server.session-timeout=60
 # 该服务绑定IP地址，启动服务器时如本机不是该IP地址则抛出异常启动失败，只有特殊需求的情况下才配置
-#server.address=114.215.122.158
+#server.address=your_IP
 
 #druid
 druid.url=jdbc:mysql://your_IP:3306/video_db?useUnicode=true&characterEncoding=utf-8&useSSL=false
@@ -45,4 +45,4 @@ logging.config=classpath:logback.xml
 logging.path=/software/boot-log
 ```
 
-具体的文章可以看[blog任意门](http://7le.top/)
+具体的文章可以看  [blog任意门](http://7le.top/)
