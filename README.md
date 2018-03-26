@@ -1,7 +1,7 @@
 # spring-boot-shine
 spring-boot
 
-### application.properties配置
+### 🌈 application.properties配置
 
 在resources文件下新建application.properties
 
@@ -44,5 +44,16 @@ spring.redis.pool.max-wait=-1
 logging.config=classpath:logback.xml
 logging.path=/software/boot-log
 ```
+### ❄ blog 
 
-具体的文章可以看  [blog任意门](http://7le.top/)
+[spring-boot项目笔记：(一)搭建项目](http://7le.top/2017/05/26/springboot%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%EF%BC%9A(%E4%B8%80)%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/)
+
+[spring-boot项目笔记：(二)集成redis，mybatis，swagger](http://7le.top/2017/06/04/springboot%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%EF%BC%9A(%E4%BA%8C)%E9%9B%86%E6%88%90redis%EF%BC%8Cmybatis%EF%BC%8Cswagger/#more)
+
+[spring-boot项目笔记：(三) 事务](http://7le.top/2017/06/11/springboot%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%EF%BC%9A(%E4%B8%89)%20%E4%BA%8B%E5%8A%A1/)
+
+[spring-boot项目笔记：(四) 拦截器和异常处理](http://7le.top/2017/06/13/springboot%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%EF%BC%9A(%E5%9B%9B)%E6%8B%A6%E6%88%AA%E5%99%A8%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/)
+
+[spring-boot项目笔记：(五) 部署和远程调试](http://7le.top/2017/06/19/springboot%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%EF%BC%9A(%E4%BA%94)%20%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/)
+
+[spring-boot项目笔记：(六) 视频截图和转码](http://7le.top/2017/06/21/springboot%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%EF%BC%9A(%E5%85%AD)%20%E8%A7%86%E9%A2%91%E6%88%AA%E5%9B%BE%E5%92%8C%E8%BD%AC%E7%A0%81/)
