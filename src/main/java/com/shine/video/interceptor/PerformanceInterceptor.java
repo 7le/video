@@ -1,5 +1,6 @@
 package com.shine.video.interceptor;
 
+import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -11,6 +12,7 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.TypeHandlerRegistry;
+import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,12 +28,13 @@ import java.util.Properties;
  */
 @Intercepts({
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
         @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})
-        /*@Signature(type = Executor.class, method = "insertIntoUserDaily", args = {MappedStatement.class, Object.class})*/
 })
+@Component
 public class PerformanceInterceptor implements Interceptor {
 
-    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final String COMMON_DATE = "yyyy-MM-dd HH:mm:ss";
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -102,7 +105,8 @@ public class PerformanceInterceptor implements Interceptor {
             if (propertyValue instanceof String) {
                 result = "'" + propertyValue + "'";
             } else if (propertyValue instanceof Date) {
-                result = "'" + DATE_FORMAT.format(propertyValue) + "'";
+                SimpleDateFormat format = new SimpleDateFormat(COMMON_DATE);
+                result = "'" + format.format(propertyValue) + "'";
             } else {
                 result = propertyValue.toString();
             }

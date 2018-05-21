@@ -24,7 +24,7 @@ public class Base64Util {
             return false;
         }
         BASE64Decoder decoder = new BASE64Decoder();
-        try {
+        try (OutputStream out = new FileOutputStream(path)){
             // 解密
             byte[] b = decoder.decodeBuffer(imgStr);
             // 处理数据
@@ -33,10 +33,8 @@ public class Base64Util {
                 b[i] += 256;
                 }
             }
-            OutputStream out = new FileOutputStream(path);
             out.write(b);
             out.flush();
-            out.close();
             return true;
         } catch (Exception e) {
             return false;

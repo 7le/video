@@ -107,11 +107,6 @@ public class VideoApplicationTests {
 
 	@Test
 	public void guavaStrings() {
-		//判断字符串是否为空
-		String input = "";
-		boolean isNullOrEmpty = Strings.isNullOrEmpty(input);
-		System.out.println("input " + (isNullOrEmpty?"is":"is not") + " null or empty.");
-
 		//获得两个字符串相同的前缀或者后缀
 		String a = "com.jd.coo.Hello";
 		String b = "com.jd.coo.Hi";

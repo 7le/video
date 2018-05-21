@@ -15,22 +15,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringBeanUtil implements ApplicationContextAware {
 
-    private static ApplicationContext applicationContext = null;
+    private static ApplicationContext content = null;
+
+    public static void setContent(ApplicationContext content) {
+        SpringBeanUtil.content = content;
+    }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringBeanUtil.applicationContext = applicationContext;
+        setContent(applicationContext);
     }
 
     public static Object getBeanByName(String beanName) {
-        if (applicationContext == null){
+        if (content == null){
             return null;
         }
-        return applicationContext.getBean(beanName);
+        return content.getBean(beanName);
     }
 
     public static <T> T getBean(Class<T> type) {
-        return applicationContext.getBean(type);
+        return content.getBean(type);
     }
 
 }
