@@ -16,7 +16,7 @@ public class EncryptUtil {
 
     private static final String ALGORITHMSTR = "AES/ECB/PKCS5Padding";
 
-    public static String base64Encode(byte[] bytes) {
+        public static String base64Encode(byte[] bytes) {
         return Base64.encodeBase64String(bytes);
     }
 
@@ -28,7 +28,7 @@ public class EncryptUtil {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         kgen.init(128);
         Cipher cipher = Cipher.getInstance(ALGORITHMSTR);
-        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(encryptKey.getBytes(), "AES"));
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(encryptKey.getBytes("utf-8"), "AES"));
 
         return cipher.doFinal(content.getBytes("utf-8"));
     }
@@ -42,10 +42,10 @@ public class EncryptUtil {
         kgen.init(128);
 
         Cipher cipher = Cipher.getInstance(ALGORITHMSTR);
-        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(decryptKey.getBytes(), "AES"));
+        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(decryptKey.getBytes("utf-8"), "AES"));
         byte[] decryptBytes = cipher.doFinal(encryptBytes);
 
-        return new String(decryptBytes);
+        return new String(decryptBytes,"utf-8");
     }
 
     public static String aesDecrypt(String encryptStr, String decryptKey) throws Exception {
