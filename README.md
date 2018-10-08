@@ -14,6 +14,7 @@
 
 [spring-boot项目笔记：(六) 视频截图和转码](http://7le.top/2017/06/21/springboot%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%EF%BC%9A(%E5%85%AD)%20%E8%A7%86%E9%A2%91%E6%88%AA%E5%9B%BE%E5%92%8C%E8%BD%AC%E7%A0%81/)
 
+[spring-cloud项目](https://github.com/7le/springcloud-analysis)
 
 ### 🌈 application.properties配置
 
