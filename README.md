@@ -16,6 +16,8 @@
 
 [spring-cloud项目](https://github.com/7le/springcloud-analysis)
 
+[springcloud：使用总结](https://7le.top/2019/05/18/springcloud：使用总结)
+
 ### 🌈 application.properties配置
 
 在resources文件下新建application.properties
